@@ -1,0 +1,29 @@
+# 依赖
+node_modules
+.pnpm-store
+
+# 构建输出
+dist
+.output
+.nuxt
+.cache
+
+# 日志
+*.log
+
+# 系统文件
+.DS_Store
+
+# 静态资源
+public
+*.min.js
+*.min.css
+
+# 配置文件（如果不想格式化）
+package-lock.json
+bun.lock
+yarn.lock
+pnpm-lock.yaml
+
+# claude-code
+.claude
