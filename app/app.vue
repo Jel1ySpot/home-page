@@ -4,7 +4,7 @@
         <NuxtPage />
     </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 useSeoMeta({
     title: 'Jel1ySpot 的主页',
     description: '这是一个个人主页',
