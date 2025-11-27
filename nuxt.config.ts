@@ -5,6 +5,9 @@ export default defineNuxtConfig({
 
     nitro: {
         static: true,
+        prerender: {
+            ignore: ['/about', '/blog'],
+        },
     },
 
     app: {
