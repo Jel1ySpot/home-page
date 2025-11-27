@@ -30,7 +30,6 @@
 import { ref, computed } from 'vue'
 import Player from '~/components/player'
 
-// --- Constants ---
 const LYRICS_DATA = [
     `おはよう！黒井影です`,
     `Call me 黒井 or 黒い影<br />both FINE`,
