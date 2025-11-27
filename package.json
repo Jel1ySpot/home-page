@@ -19,13 +19,19 @@
         "@nuxt/icon": "2.1.0",
         "@nuxt/image": "1.11.0",
         "@nuxt/scripts": "0.13.0",
+        "@tresjs/nuxt": "^5.1.1",
+        "@types/three": "^0.181.0",
         "@unhead/vue": "^2.0.3",
+        "colorthief": "^2.6.0",
         "eslint": "^9.0.0",
         "nuxt": "^4.2.0",
+        "three": "^0.181.2",
         "vue": "^3.5.22",
         "vue-router": "^4.6.3"
     },
     "devDependencies": {
+        "@nuxtjs/tailwindcss": "^6.14.0",
+        "@types/colorthief": "^2.6.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",
         "prettier": "^3.6.2"
