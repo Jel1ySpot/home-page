@@ -7,7 +7,6 @@ export default defineNuxtConfig({
         static: true,
         prerender: {
             ignore: ['/about', '/blog'],
-            failOnError: false,
         },
     },
 
