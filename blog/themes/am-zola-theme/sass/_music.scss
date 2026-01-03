@@ -1,0 +1,68 @@
+.music-page {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.music-content {
+    line-height: 1.7;
+}
+
+.music-content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1.6rem;
+}
+
+.music-content thead {
+    display: none;
+}
+
+.music-content tbody tr {
+    display: block;
+}
+
+.music-content td,
+.music-content th {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.music-content td {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+}
+
+.music-content td:first-child {
+    margin-top: 1rem;
+    font-size: 1.75rem;
+    color: var(--text-primary);
+}
+
+.music-content td:last-child {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.music-content td:only-child {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: var(--text-primary);
+}
+
+@media (max-width: 720px) {
+    .music-content {
+        padding: 1.5rem;
+    }
+    
+    .music-content td {
+        font-size: 1.15rem;
+    }
+    
+    .music-content td:last-child {
+        font-size: 0.95rem;
+    }
+}

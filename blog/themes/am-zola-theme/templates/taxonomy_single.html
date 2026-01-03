@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% import "_funcs.html" as func %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        {% set title_text = func::t(key="taxonomy_title_format") | replace(from="{taxonomy}", to=(taxonomy.name | capitalize)) | replace(from="{term}", to=term.name) %}
+        <h1 class="title">{{ title_text }}</h1>
+        <div class="posts-grid">
+            {% if paginator %}
+                {% for page in paginator.pages %}
+                    {{ macros::post_card(page=page) }}
+                {% endfor %}
+            {% else %}
+                {% for page in term.pages %}
+                    {{ macros::post_card(page=page) }}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% if paginator and paginator.number_pagers > 1 %}
+        <nav class="pagination">
+            {% if paginator.previous %}
+            <a class="page-link" href="{{ paginator.previous }}">← {{ func::t(key="pagination_prev") }}</a>
+            {% else %}
+            <span class="page-link is-disabled">← {{ func::t(key="pagination_prev") }}</span>
+            {% endif %}
+
+            <div class="page-numbers">
+                {% set pager_end = paginator.number_pagers + 1 %}
+                {% for i in range(start=1, end=pager_end) %}
+                    {% if i == 1 %}
+                        {% set page_link = paginator.first %}
+                    {% else %}
+                        {% set page_link = paginator.base_url ~ i %}
+                    {% endif %}
+                    <a class="page-number {% if i == paginator.current_index %}is-active{% endif %}"
+                       href="{{ page_link }}">{{ i }}</a>
+                {% endfor %}
+            </div>
+
+            {% if paginator.next %}
+            <a class="page-link" href="{{ paginator.next }}">{{ func::t(key="pagination_next") }} →</a>
+            {% else %}
+            <span class="page-link is-disabled">{{ func::t(key="pagination_next") }} →</span>
+            {% endif %}
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

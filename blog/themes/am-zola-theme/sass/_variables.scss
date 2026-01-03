@@ -1,0 +1,42 @@
+// CSS 变量定义
+:root {
+    --spacing: .25rem;
+    --border-radius: 0.75rem;
+    --card-height: 190px;
+}
+
+/* Dark mode colors */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-tertiary: #808080;
+    --border-color: #404040;
+    --card-bg: rgba(30, 30, 30, 0.85);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --sidebar-hover: rgba(255, 255, 255, 0.15);
+    --sidebar-search-bg: rgba(255, 255, 255, 0.08);
+    --sidebar-search-text: rgba(255, 255, 255, 0.7);
+    --sidebar-search-text-hover: #ffffff;
+    --post-card-hover-bg: rgba(255, 255, 255, 0.04);
+    --sidebar-border: rgba(255, 255, 255, 0.15);
+}
+
+/* Light mode colors (显式) */
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --text-primary: #101010;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --border-color: #e0e0e0;
+    --card-bg: rgba(255, 255, 255, 0.25);
+    --card-border: rgba(0, 0, 0, 0.1);
+    --sidebar-hover: rgba(255, 255, 255, 0.1);
+    --sidebar-search-bg: rgba(0, 0, 0, 0.06);
+    --sidebar-search-text: rgba(0, 0, 0, 0.6);
+    --sidebar-search-text-hover: #000000;
+    --post-card-hover-bg: rgba(0, 0, 0, 0.06);
+    --sidebar-border: rgba(255, 255, 255, 0.1);
+}

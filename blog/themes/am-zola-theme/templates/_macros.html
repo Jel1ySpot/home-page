@@ -1,0 +1,52 @@
+{% import "_funcs.html" as func %}
+
+{% macro card(title="", content="", class="") %}
+<div class="card {{ class }}">
+    {% if title %}
+    <h3>{{ title }}</h3>
+    {% endif %}
+    <div class="card-content">
+        {{ content | safe }}
+    </div>
+</div>
+{% endmacro card %}
+
+{% macro post_card(page) %}
+{% set tag_label = "" %}
+{% if page.taxonomies.tags and page.taxonomies.tags | length > 0 %}
+    {% set tag_label = page.taxonomies.tags | first %}
+{% elif page.extra.type is defined %}
+    {% set tag_label = page.extra.type %}
+{% else %}
+    {% set tag_label = "article" %}
+{% endif %}
+<div class="card post-card" role="link" tabindex="0"
+     onclick="window.location.href='{{ get_url(path=page.path, lang=lang) }}'"
+     onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href='{{ get_url(path=page.path, lang=lang) }}'; }"
+     aria-label="{{ page.title }}">
+    {% if page.extra.cover %}
+    <div class="card-cover">
+        {% if page.extra.cover %}
+        <img src="{{ get_url(path=page.extra.cover) }}" alt="{{ page.title }} cover">
+        {% endif %}
+    </div>
+    {% endif %}
+    <div class="card-content">
+        <h3 class="post-title">{{ page.title }}</h3>
+        <p class="post-desc">{{ page.description | default(value=page.content | striptags | truncate(length=140)) }}</p>
+        <div class="post-meta">
+            <span class="post-tags">
+                {% if page.taxonomies.tags %}
+                    {% for tag in page.taxonomies.tags %}
+                    <span>{{ tag | upper }}</span>
+                    {% endfor %}
+                {% elif tag_label %}
+                    <span>{{ tag_label | upper }}</span>
+                {% endif %}
+            </span>
+            <time>{{ func::locale_date(date=page.date) }}</time>
+        </div>
+    </div>
+    <div class="post-arrow">›</div>
+</div>
+{% endmacro post_card %}

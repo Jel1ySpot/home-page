@@ -1,0 +1,25 @@
+// 导入模块
+@import "variables";
+@import "card";
+@import "posts";
+@import "page";
+@import "music";
+@import "taxonomy";
+@import "sidebar";
+@import "layout";
+
+// 全局样式
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    color: var(--text-primary);
+    min-height: 100vh;
+    background: transparent;
+    transition: color 0.3s ease;
+}

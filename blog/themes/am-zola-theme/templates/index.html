@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% import "_funcs.html" as func %}
+
+{% block content %}
+<section class="section">
+    <div class="container">        
+        {% set root_section = get_section(path="_index.md", lang=lang) %}
+        {% set subsections = root_section.subsections %}
+        {% set_global all_pages = [] %}
+        {% for subsection in subsections %}
+            {% set section = get_section(path=subsection) %}
+            {% set_global all_pages = all_pages | concat(with=section.pages) %}
+        {% endfor %}
+        
+        {% set pin_pages = config.extra.pin_pages | default(value=[]) %}
+
+        {% if pin_pages | length > 0 %}
+        <div class="pinned-section">
+            <div class="pinned-header">
+                <h2 class="pinned-title">{{ func::t(key="pin_pages") }}</h2>
+                <a class="pinned-link" href="{{ get_url(path="@/_index.md", lang=lang) }}">
+                    {{ func::t(key="view_all") }}
+                    <span class="pinned-link-icon">›</span>
+                </a>
+            </div>
+            <div class="pinned-row">
+                {% for page_path in pin_pages %}
+                    {% set page = all_pages | filter(attribute="path", value=page_path) | first %}
+                    {% if page %}
+                    <article class="pin-card">
+                        <a class="pin-link" href="{{ page.permalink }}">
+                            <div class="pin-cover">
+                                {% if page.extra.cover %}
+                                <img src="{{ get_url(path=page.extra.cover) }}" alt="{{ page.title }} cover">
+                                {% endif %}
+                                <div class="pin-overlay"></div>
+                            </div>
+                            <div class="pin-meta">
+                                <div class="pin-title">{{ page.title }}</div>
+                                {% if page.taxonomies.tags and page.taxonomies.tags | length > 0 %}
+                                <div class="pin-kicker">{{ page.taxonomies.tags | join(sep=" ") | upper }}</div>
+                                {% elif page.extra.type is defined %}
+                                <div class="pin-kicker">{{ page.extra.type | upper }}</div>
+                                {% else %}
+                                <div class="pin-kicker">ARTICLE</div>
+                                {% endif %}
+                                <div class="pin-sub">{{ func::locale_date(date=page.date) }}</div>
+                            </div>
+                        </a>
+                    </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <section class="recent-section">
+            <div class="recent-header">
+                <h2 class="recent-title">{{ func::t(key="recent_updates") }}</h2>
+                <div class="recent-meta">
+                    <span class="recent-count">{{ all_pages | length }} {{ func::t(key="posts_count") }}</span>
+                </div>
+            </div>
+            <div class="posts-grid">
+                {% for page in all_pages | sort(attribute="date") | reverse | slice(end=5) %}
+                    {{ macros::post_card(page=page) }}
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock content %}

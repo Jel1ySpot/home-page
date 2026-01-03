@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "_funcs.html" as func %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="taxonomy-header">
+            <h1 class="title">{{ taxonomy.name | capitalize }}</h1>
+        </div>
+        <div class="taxonomy-grid">
+            {% set tag_colors = config.extra.tag_colors | default(value=[]) %}
+            {% set tag_colors_len = tag_colors | length %}
+            {% for term in terms %}
+            {% set tag_image = config.extra.tag_images[term.name] | default(value="") %}
+            {% if tag_image and (tag_image is starting_with("http") or tag_image is starting_with("//")) %}
+                {% set tag_image_url = tag_image %}
+            {% elif tag_image %}
+                {% set tag_image_url = get_url(path=tag_image) %}
+            {% else %}
+                {% set tag_image_url = "" %}
+            {% endif %}
+            {% set tag_color = "" %}
+            {% if tag_colors_len > 0 %}
+                {% set color_index = loop.index0 % tag_colors_len %}
+                {% set tag_color = tag_colors[color_index] %}
+            {% endif %}
+            <a class="taxonomy-card {% if not tag_image_url %}is-fallback{% endif %}" href="{{ term.permalink }}">
+                <div class="taxonomy-card-media"
+                     {% if tag_image_url or tag_color %}
+                     style="
+                        {% if tag_image_url %}background-image: url('{{ tag_image_url }}');{% endif %}
+                        {% if tag_color %}--tag-color: {{ tag_color }};{% endif %}
+                     "
+                     {% endif %}>
+                    {% if not tag_image_url %}
+                    <span class="taxonomy-card-fallback">{{ term.name | upper }}</span>
+                    {% endif %}
+                </div>
+                <div class="taxonomy-card-title">{{ term.name }}</div>
+                {% set count_parts = func::t(key="tag_count_format") | split(pat="{}") %}
+                <div class="taxonomy-card-meta">{{ count_parts.0 }}{{ term.pages | length }}{{ count_parts.1 | default(value="") }}</div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
