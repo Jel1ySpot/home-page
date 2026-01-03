@@ -23,5 +23,7 @@ logs
 .env.*
 !.env.example
 
-# claude-code
+# AI
 .claude
+CLAUDE.md
+GEMINI.md

@@ -1,0 +1,34 @@
+# The URL the site will be built for
+base_url = "https://jellyspot.cc/blog"
+
+title = "黒井影のブログ"
+
+author = "Kuroikage"
+
+default_language = "zh"
+
+compile_sass = true
+
+build_search_index = false
+
+theme = "am-zola-theme"
+
+taxonomies = [
+    {name = "tags", paginate_by = 10},
+]
+
+[markdown]
+highlight_code = true
+
+[extra]
+
+pin_pages = ["/music/watashi-wa-ame/"]
+theme_color = "#ff2d55"
+
+[extra.background_colors]
+light = ["#ecbcff", "#ffc9df", "#d3f0ff", "#fff1b8"]
+dark = ["#2c0c0c", "#051136", "#230339", "#1e1a4d"]
+
+[extra.tag_images]
+vocaloid = "/Inabakumori_-_Watashi_wa_Ame.webp"
+
