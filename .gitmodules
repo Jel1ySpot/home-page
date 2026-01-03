@@ -1,0 +1,3 @@
+[submodule "blog/themes/am-zola-theme"]
+	path = blog/themes/am-zola-theme
+	url = https://github.com/Jel1ySpot/am-zola-theme
